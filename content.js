@@ -33,12 +33,12 @@ function loadButton () {
     button.style.cursor = "pointer";
     button.appendChild(buttonText);
     button.id = "togglePastTasksButton"
-    const containerBox = document.querySelector("body > center > div")
-    containerBox.style.display = "flex";
-    containerBox.style.alignItems = "center"
-    containerBox.style.justifyContent = "center"
-    containerBox.style.flexDirection ="column";
-    containerBox.appendChild(button)
+    const containerBox = document.querySelector("body > center > div#ics")
+    containerBox.insertBefore(button, containerBox.firstChild)
+    // containerBox.style.display = "flex";
+    // containerBox.style.alignItems = "center"
+    // containerBox.style.justifyContent = "center"
+    // containerBox.style.flexDirection ="column";
 }
 
 
@@ -49,7 +49,6 @@ function loadButton () {
 let loadingInterval = setInterval(() => {
     let loadingElement = document.querySelector("#loading")
     if (loadingElement.style.display == "none")  {
-        console.log('loaded')
         clearInterval(loadingInterval)
         loadButton()
         togglePast()
