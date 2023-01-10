@@ -21,20 +21,37 @@ function togglePast() {
     
 }
 
-let button = document.createElement("button");
-button.onclick = togglePast
-let buttonText = document.createTextNode("Hide Past");
-button.style.padding = "10px 20px";
-button.style.backgroundColor = "#e4181f";
-button.style.color = "white"
-button.style.border = "none";
-button.style.borderRadius = "5px";
-button.style.cursor = "pointer";
-button.appendChild(buttonText);
-button.id = "togglePastTasksButton"
-const containerBox = document.querySelector("body > center > div")
-containerBox.style.display = "flex";
-containerBox.style.alignItems = "center"
-containerBox.style.justifyContent = "center"
-containerBox.style.flexDirection ="column";
-containerBox.appendChild(button)
+function loadButton () {
+    let button = document.createElement("button");
+    button.onclick = togglePast
+    let buttonText = document.createTextNode("Show Past");
+    button.style.padding = "10px 20px";
+    button.style.backgroundColor = "#e4181f";
+    button.style.color = "white"
+    button.style.border = "none";
+    button.style.borderRadius = "5px";
+    button.style.cursor = "pointer";
+    button.appendChild(buttonText);
+    button.id = "togglePastTasksButton"
+    const containerBox = document.querySelector("body > center > div")
+    containerBox.style.display = "flex";
+    containerBox.style.alignItems = "center"
+    containerBox.style.justifyContent = "center"
+    containerBox.style.flexDirection ="column";
+    containerBox.appendChild(button)
+}
+
+
+
+
+// wait until loaded
+
+let loadingInterval = setInterval(() => {
+    let loadingElement = document.querySelector("#loading")
+    if (loadingElement.style.display == "none")  {
+        console.log('loaded')
+        clearInterval(loadingInterval)
+        loadButton()
+        togglePast()
+    }
+},100)
