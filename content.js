@@ -6,10 +6,9 @@
 // Description: Handles all the webpage level activities (e.g. manipulating page data, etc.)
 // License: MIT
 
-let showingPast = true;
+let showingPast = false;
 
 function togglePast() {
-    showingPast = !showingPast
     document.querySelectorAll(".eventbodyouter").forEach((el)=>{
         let date = new Date(el.innerText)
         let now = new Date()
@@ -18,6 +17,7 @@ function togglePast() {
         if (inPast) el.closest(".section_0").style.display = showingPast ? "block" : "none"
     })
     document.querySelector("#togglePastTasksButton").innerText = showingPast ? "Hide Past" : "Show Past"
+    showingPast = !showingPast
     
 }
 
