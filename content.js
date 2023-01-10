@@ -1,23 +1,20 @@
 // content.js
-// Author:
-// Author URI: https://
-// Author Github URI: https://www.github.com/
-// Project Repository URI: https://github.com/
-// Description: Handles all the webpage level activities (e.g. manipulating page data, etc.)
+// Author: JackBailey
+// Author URI: https://jackbailey.dev
+// Author Github URI: https://github.com/JackBailey
+// Project Repository URI: https://github.com/JackBailey/Scheduleit-HidePast
+// Description: Adds a button to toggle visibility of past tasks and toggles them if they took place yesterday or before.
 // License: MIT
 
 let showingPast = false;
 
 function togglePast() {
-    document.querySelectorAll(".eventbodyouter").forEach((el)=>{
-        let date = new Date(el.innerText)
-        let now = new Date()
-        now.setDate(now.getDate()-1)
-        let inPast = date < now
-        if (inPast) el.closest(".section_0").style.display = showingPast ? "block" : "none"
+    showingPast = !showingPast
+    document.querySelectorAll(".section_0").forEach((el)=>{
+        let inPast = el.getAttribute('past') === "true"
+        if (inPast) el.style.display = showingPast ? "block" : "none"
     })
     document.querySelector("#togglePastTasksButton").innerText = showingPast ? "Hide Past" : "Show Past"
-    showingPast = !showingPast
     
 }
 
@@ -35,22 +32,21 @@ function loadButton () {
     button.id = "togglePastTasksButton"
     const containerBox = document.querySelector("body > center > div#ics")
     containerBox.insertBefore(button, containerBox.firstChild)
-    // containerBox.style.display = "flex";
-    // containerBox.style.alignItems = "center"
-    // containerBox.style.justifyContent = "center"
-    // containerBox.style.flexDirection ="column";
 }
 
 
-
-
-// wait until loaded
-
-let loadingInterval = setInterval(() => {
-    let loadingElement = document.querySelector("#loading")
-    if (loadingElement.style.display == "none")  {
-        clearInterval(loadingInterval)
-        loadButton()
-        togglePast()
+document.querySelector("#ics").addEventListener("DOMNodeInserted", (e) => {
+    if (e.target.localName === "div" && e.target.classList.contains("section_0")) {
+        let date = new Date(e.target.querySelector(".eventbodyouter").innerText)
+        let now = new Date()
+        now.setDate(now.getDate()-1)
+        let inPast = date < now
+        e.target.setAttribute('past', inPast.toString())
+        if (inPast) {
+            console.log(inPast)
+            e.target.style.display = showingPast ? "block" : "none"
+        }
+    
+        if (!document.querySelector("#togglePastTasksButton")) loadButton()
     }
-},100)
+})
