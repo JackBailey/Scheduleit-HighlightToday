@@ -5,3 +5,36 @@
 // Project Repository URI: https://github.com/
 // Description: Handles all the webpage level activities (e.g. manipulating page data, etc.)
 // License: MIT
+
+let showingPast = true;
+
+function togglePast() {
+    showingPast = !showingPast
+    document.querySelectorAll(".eventbodyouter").forEach((el)=>{
+        let date = new Date(el.innerText)
+        let now = new Date()
+        now.setDate(now.getDate()-1)
+        let inPast = date < now
+        if (inPast) el.closest(".section_0").style.display = showingPast ? "block" : "none"
+    })
+    document.querySelector("#togglePastTasksButton").innerText = showingPast ? "Hide Past" : "Show Past"
+    
+}
+
+let button = document.createElement("button");
+button.onclick = togglePast
+let buttonText = document.createTextNode("Hide Past");
+button.style.padding = "10px 20px";
+button.style.backgroundColor = "#e4181f";
+button.style.color = "white"
+button.style.border = "none";
+button.style.borderRadius = "5px";
+button.style.cursor = "pointer";
+button.appendChild(buttonText);
+button.id = "togglePastTasksButton"
+const containerBox = document.querySelector("body > center > div")
+containerBox.style.display = "flex";
+containerBox.style.alignItems = "center"
+containerBox.style.justifyContent = "center"
+containerBox.style.flexDirection ="column";
+containerBox.appendChild(button)

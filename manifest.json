@@ -1,30 +1,22 @@
 {
-  "manifest_version": 2,
-  "name": "Your Chrome Extension Name",
+  "manifest_version": 3,
+  "name": "Schedule it Hide Past",
   "version": "0.1",
-  "author": "First Last",
-  "description": "A description about your Chrome Extension...",
+  "author": "Jack Bailey",
+  "description": "Provides a button to hide previous tasks on scheduleit.",
   "permissions": [
-    ""
+    "tabs"
   ],
-  "content_scripts": [
-    {
-      "matches": [
-        "<all_urls>"
-      ],
-      "js": [
-        "content.js"
-      ]
-    }
+  "host_permissions": [
+    "*://www.scheduleit.com/*"
   ],
-  "background": {
-    "scripts": [
-      "background.js"
-    ]
-  },
-  "browser_action": {
-    "default_icon": "logo.png",
-    "default_popup": "index.html",
-    "default_title": "A tooltip popup description when you hover over the Chrome Extension icon."
+  "content_scripts": [{
+        "js": ["content.js"],
+        "matches": ["*://www.scheduleit.com/*"]
+  }],
+  "icons": {
+    "16": "icons/favicon-16x16.png",
+    "32": "icons/favicon-32x32.png",
+    "128": "icons/logo.png"
   }
 }
