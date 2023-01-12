@@ -1,12 +1,12 @@
-# Schedule it Hide Past
+# Schedule it HighlightToday
 
-Adds a simple button to hide past tasks on scheduleit.
+Highlights and scrolls to the current day on scheduleit.
 
 ## Author
 Jack Bailey
 - [Author Website](https://jackbailey.dev)
 - [Author Github](https://github.com/JackBailey)
-- [Project Repository](https://github.com/JackBailey/Scheduleit-HidePast)
+- [Project Repository](https://github.com/JackBailey/Scheduleit-HighlightToday)
 
 ## Setup Instructions
 ### For Developers

@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "Schedule it Hide Past",
+  "name": "Schedule it HighlightToday",
   "version": "0.1",
   "author": "Jack Bailey",
-  "description": "Provides a button to hide previous tasks on scheduleit.",
+  "description": "Highlights the current day on scheduleit.",
   "permissions": [
     "tabs"
   ],
