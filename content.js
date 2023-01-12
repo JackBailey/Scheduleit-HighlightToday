@@ -21,7 +21,7 @@ document.querySelector("#ics").addEventListener("DOMNodeInserted", (e) => {
         let dateIsToday = isToday(date)
         if (dateIsToday) {
             e.target.querySelector(".eventbodyouter").style.backgroundColor = "#6cbeeb"
-            e.target.querySelector(".eventbodyinner").style.backgroundColor = "#aed5eb"
+            e.target.querySelector(".eventbodyouter").style.color="white"
             if (!hasScrolled) {
                 hasScrolled = true
                 const element = e.target
