@@ -6,10 +6,11 @@
 // Description: Highlights the current day on ScheduleIt.
 // License: MIT
 
+let now = new Date();
 let hasScrolled = false;
 
 function isToday(someDate) {
-	const today = new Date();
+	const today = now;
 	return someDate.getDate() == today.getDate() && someDate.getMonth() == today.getMonth() && someDate.getFullYear() == today.getFullYear();
 }
 
@@ -20,13 +21,30 @@ document.querySelector("#ics").addEventListener("DOMNodeInserted", (e) => {
 		if (dateIsToday) {
 			e.target.querySelector(".eventbodyouter").style.backgroundColor = "#6cbeeb";
 			e.target.querySelector(".eventbodyouter").style.color = "white";
+			e.target.querySelector(".eventbody").style.height = "";
 			if (!hasScrolled) {
 				hasScrolled = true;
 				const element = e.target;
-				const elementRect = element.getBoundingClientRect();
-				const absoluteElementTop = elementRect.top + window.pageYOffset;
-				const middle = Math.abs(absoluteElementTop - window.innerHeight / 2);
-				window.scrollTo(0, middle);
+				element.scrollIntoView({
+					behavior: "smooth",
+				});
+			}
+		}
+		if (!dateIsToday && !hasScrolled) {
+			if (date > now) {
+				const placeholder = document.createElement("div");
+				placeholder.style.backgroundColor = "#6cbeeb";
+				placeholder.style.color = "white";
+				placeholder.style.maxWidth = "650px";
+				placeholder.style.borderRadius = "5px";
+				placeholder.style.padding = "10px";
+				placeholder.style.boxSizing = "border-box";
+				placeholder.style.marginBottom = "20px";
+				const text = document.createTextNode("Nothing planned for today.");
+				placeholder.appendChild(text);
+
+				document.querySelector("#ics").insertBefore(placeholder, e.target);
+				hasScrolled = true;
 			}
 		}
 	}
