@@ -1,22 +1,23 @@
 {
-  "manifest_version": 3,
-  "name": "Schedule it HighlightToday",
-  "version": "0.1",
-  "author": "Jack Bailey",
-  "description": "Highlights the current day on scheduleit.",
-  "permissions": [
-    "tabs"
-  ],
-  "host_permissions": [
-    "*://www.scheduleit.com/*"
-  ],
-  "content_scripts": [{
-        "js": ["content.js"],
-        "matches": ["*://www.scheduleit.com/*"]
-  }],
-  "icons": {
-    "16": "icons/favicon-16x16.png",
-    "32": "icons/favicon-32x32.png",
-    "128": "icons/logo.png"
-  }
+	"manifest_version": 3,
+	"name": "Schedule it HighlightToday",
+	"version": "2.0",
+	"author": "Jack Bailey",
+	"description": "Highlights the current day on scheduleit.",
+	"permissions": ["tabs", "storage"],
+	"host_permissions": ["*://www.scheduleit.com/*"],
+	"content_scripts": [
+		{
+			"js": ["content.js"],
+			"matches": ["*://www.scheduleit.com/*"]
+		}
+	],
+	"icons": {
+		"16": "icons/favicon-16x16.png",
+		"32": "icons/favicon-32x32.png",
+		"128": "icons/logo.png"
+	},
+	"action": {
+		"default_popup": "index.html"
+	}
 }

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<style>
+			body {
+				width: 400px;
+				max-width: 50%;
+				text-align: center;
+				margin: 20px auto;
+			}
+			label,
+			input {
+				margin: 0;
+			}
+			h1 {
+				line-height: 1.5;
+			}
+			.options {
+				text-align: left;
+				margin: 0;
+			}
+			.options .option {
+				margin-bottom: 10px;
+				line-height: 1.5;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Schedule it Enhancements</h1>
+		<div class="options">
+			<div class="option">
+				<input type="checkbox" id="enablePastHiding" name="enablePastHiding" />
+				<label for="enablePastHiding">Show button to hide past shifts</label>
+			</div>
+			<div class="option">
+				<input type="checkbox" id="highlightCurrent" name="highlightCurrent" />
+				<label for="highlightCurrent">Highlight shifts that take place on the current day</label>
+			</div>
+			<div class="option">
+				<input type="checkbox" id="scrollToCurrent" name="scrollToCurrent" />
+				<label for="scrollToCurrent">Scroll to the first shift of the day automatically</label>
+			</div>
+			<div class="option">
+				<input type="checkbox" id="expandCurrent" name="expandCurrent" />
+				<label for="expandCurrent">Expand shifts happening today</label>
+			</div>
+		</div>
+		<button id="saveButton">Save</button>
+		<script src="popup.js"></script>
+	</body>
+</html>
