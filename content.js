@@ -9,16 +9,27 @@
 let now = new Date();
 let hasScrolled = false;
 
-function isToday(someDate) {
-	const today = now;
-	return someDate.getDate() == today.getDate() && someDate.getMonth() == today.getMonth() && someDate.getFullYear() == today.getFullYear();
+const getEventBoundaries = (date) => {
+	let multiDay = date.includes("to");
+	let start = new Date(date.split(multiDay ? "to" : "-")[0]);
+	let end;
+	if (multiDay) {
+		end = new Date(date.split("to")[1]);
+	} else {
+		let [hour, minutes] = date.split("-")[1].split(":")
+		end = new Date(date.split(multiDay ? "to" : "-")[0])
+		end.setHours(parseInt(hour))
+		end.setMinutes(parseInt(minutes));
+	}
+
+	return [start, end];
 }
 
 document.querySelector("#ics").addEventListener("DOMNodeInserted", (e) => {
 	if (e.target.localName === "div" && e.target.classList.contains("section_0")) {
-		let date = new Date(e.target.querySelector(".eventbodyouter").innerText);
-		let dateIsToday = isToday(date);
-		if (dateIsToday) {
+		let [start, end] = getEventBoundaries (e.target.querySelector(".eventbodyouter").innerText);
+		let eventIsCurrent = start < now && end > now;
+		if (eventIsCurrent) {
 			e.target.querySelector(".eventbodyouter").style.backgroundColor = "#6cbeeb";
 			e.target.querySelector(".eventbodyouter").style.color = "white";
 			e.target.querySelector(".eventbody").style.height = "";
@@ -29,9 +40,8 @@ document.querySelector("#ics").addEventListener("DOMNodeInserted", (e) => {
 					behavior: "smooth",
 				});
 			}
-		}
-		if (!dateIsToday && !hasScrolled) {
-			if (date > now) {
+		} else if (!hasScrolled) {
+			if (end > now) {
 				const placeholder = document.createElement("div");
 				placeholder.style.backgroundColor = "#6cbeeb";
 				placeholder.style.color = "white";
